@@ -30,15 +30,20 @@
     <Reference Include="MicroBlocks.App">
       <HintPath>Utilities\bins\MicroBlocks.App.dll</HintPath>
     </Reference>
-    <Reference Include="MicroBlocks.StrategicTelecomAgg">
-      <HintPath>Utilities\bins\MicroBlocks.StrategicTelecomAgg.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Update="wwwroot\New Text Document.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  
+  <ItemGroup>
+    <Protobuf Include="Protos\Congrats\Congrats.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\Congratulations\Group.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\Medal\Medals.proto" />
+    <Protobuf Include="Protos\OrgMembersProto.proto" />
+    <Protobuf Include="Protos\OrgProto.proto" GrpcServices="Both" />
+    <Protobuf Include="Protos\Thanks\ThanksMessage.proto" GrpcServices="Client" />
+    <Protobuf Include="Protos\UserProto.proto" />
+  </ItemGroup>
 
 </Project>

@@ -1,0 +1,421 @@
+syntax = "proto3";
+
+option csharp_namespace = "StrategicTelecom_Aggregator.API.Protos";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+service UserProtoService {
+
+  rpc GetUserById (RequestGetUserById) returns (ResponseGetUserById);
+  rpc GetUserByUserId (RequestGetUserById) returns (GetUserByUserIdResponse);
+  rpc GetUserRoles (RequestUserId) returns (ResponseUserRoles);
+  rpc GetAllUsers (RequestGroupId) returns (ResponseUserData);
+  rpc GetListOfUsers (RequestedUserList) returns (ResponseUserDataList);
+  rpc GetAllUsersByIds (GetAllUsersByIdsRequest) returns (GetAllUsersByIdsResponse);
+
+  //USER FAVORITE
+  rpc PostFavorite(RequestFavoriteWorkspace) returns (google.protobuf.Empty);
+  rpc GetAllLoggedUserFavorites (RequestFavoriteState) returns (ResponseAllUserFavorites);
+  rpc PutFavorite (RequestFavoriteWorkspace) returns (google.protobuf.Empty);
+  rpc DeleteFavorite (RequestFavoriteWorkspace) returns (google.protobuf.Empty);
+
+  //USER HIDDENS
+  rpc PostHiddenWorkspace(RequestFavoriteWorkspace) returns (google.protobuf.Empty);
+  rpc GetAllLoggedUserHiddens (RequestFavoriteState) returns (ResponseAllUserFavorites);
+  rpc PutHiddenWorkspace (RequestFavoriteWorkspace) returns (google.protobuf.Empty);
+  rpc DeleteHiddenWorkspace (RequestFavoriteWorkspace) returns (google.protobuf.Empty);
+  rpc postUser(RequestPostUser) returns (ResponsePostUser);
+  rpc PutUserSummary(PutUserSummaryRequest) returns (PutUserSummaryResponse);
+
+
+  // user profile
+  rpc userprofileById(RequestGetUserById) returns (UserOverviewDto);
+   rpc PutfunctionDataAllInformationJob(RequsetPutfunctionDataAllInformationJob) returns (ResponesfunctionDataAllInformationJob);
+    rpc GetfunctionDataAllInformationJobyId(RequestGetUserById) returns (ResponesGetfunctionDataAllInformationJob);
+
+	rpc AllUsersPaginate(RequestUsersPaginate) returns (ResponsUsers);
+	rpc GetSomeInfoUsersByIds(RequestedUserList) returns (ResponseGetSomeInfoUsersByIds);
+	rpc GetUserIds(GetUserIdsRequest) returns (GetUserIdsResponse);
+	rpc GetMangerId(GetMangerIdRequest) returns (GetMangerIdResponse);
+	rpc GetAllUsersByMangerId(GetAllUsersByMangerIdRequest) returns (GetAllUsersByMangerIdResponse);
+
+}
+message RequestGetUserById {
+  string userId = 1;
+}
+
+
+message ResponseGetUserById {
+	string FirstName=1 ; 
+	string SecondName=2;
+	string ThirdName=3; 
+	string FourthName=4; 
+	string ImgUrl=5;
+	string UserId = 6;
+	bool IsChecked = 7;
+	string Email = 8;
+	string UserName = 9;
+	string JobNameAr = 10;
+	string JobNameEn = 11;
+	string PhoneNumber = 12;
+	string Mobile = 13 ;
+string TransactionNumber = 14 ;
+	repeated RoleDto Roles = 15;
+	string CommonNameAD = 16;
+}
+message RoleDto{
+	string Id = 1;
+	string NameAr = 2;
+	string NameEn = 3;
+}
+
+message ResponseUserData
+{
+	repeated ResponseGetUserById UserData = 1;
+}
+
+message RequestUserId {
+  string userId = 1;
+}
+
+message ResponseUserRoles
+{
+	repeated string roleId = 1; 
+}
+
+message RequestFavoriteWorkspace
+{
+	string ReqWorkspaceId = 1;
+}
+
+message ResponseAllUserFavorites
+{
+	repeated string WorkspaceId = 1;
+}
+
+message RequestFavoriteState
+{
+	int32 state = 1;
+}
+// user profile
+message BasicInformationDTO {
+  google.protobuf.StringValue Id = 1;
+   google.protobuf.StringValue UserName = 2;
+   google.protobuf.StringValue ImageUrl = 3;
+   google.protobuf.StringValue Email = 4;
+   google.protobuf.StringValue NationalId = 5;
+   google.protobuf.StringValue FirstName = 6;
+   google.protobuf.StringValue SecondName = 7;
+   google.protobuf.StringValue ThirdName = 8;
+   google.protobuf.StringValue ForthName = 9;
+   google.protobuf.StringValue Address = 10;
+  int32 UserGender = 11;
+  google.protobuf.StringValue PhoneNumber = 12;
+  google.protobuf.StringValue BirthDate = 13;
+   google.protobuf.StringValue Nationality = 14;
+  int32 MaritalStatus = 15;
+  google.protobuf.StringValue Mobile = 16 ;
+google.protobuf.StringValue TransactionNumber = 17 ;
+string CommonNameAD = 18;
+
+}
+
+message UserExperinceDTO {
+  google.protobuf.StringValue Id = 1;
+   google.protobuf.StringValue QualificationType = 2;
+   google.protobuf.StringValue University = 3;
+   google.protobuf.StringValue Specialization = 4;
+  google.protobuf.StringValue Date = 5;
+   google.protobuf.StringValue ScientificExpertise = 6;
+   google.protobuf.StringValue Attachments = 7;
+}
+
+message UserJobDTO {
+  google.protobuf.StringValue userId = 1;
+   google.protobuf.StringValue JobCode = 2;
+  google.protobuf.StringValue HiringDate = 3;
+   google.protobuf.StringValue Vacation = 4;
+   google.protobuf.StringValue LengthOfService = 5;
+  google.protobuf.StringValue JobDegreeNameAr = 6;
+  google.protobuf.StringValue JobDegreeNameEn = 7;
+  google.protobuf.StringValue JobDegreeId = 8;
+  google.protobuf.StringValue Promotion = 9;
+}
+
+message GetAllInformationJob {
+  google.protobuf.StringValue InformationJobId = 1;
+  google.protobuf.StringValue JobDegreeId = 2;
+   google.protobuf.StringValue JobDegreeNameAr = 3;
+   google.protobuf.StringValue JobDegreeNameEn = 4;
+  google.protobuf.StringValue StartDate = 5;
+  google.protobuf.StringValue EndDate = 6;
+  google.protobuf.StringValue JobRoleId = 8;
+   double JobTime = 7;
+      google.protobuf.StringValue JobRoleNameAr = 9;
+   google.protobuf.StringValue JobRoleNameEn = 10;
+   google.protobuf.StringValue OrgId = 12;
+}
+
+message UserOverviewDto {
+  UserJobDTO FunctionalData = 1;
+  BasicInformationDTO BasicInformationDTO = 2;
+  repeated GetAllInformationJob JobHistory = 3;
+  repeated UserExperinceDTO ScientificDataAndExperiences = 4;
+}
+message ResponesGetfunctionDataAllInformationJob {
+	repeated GetAllInformationJob JobHistory = 3;
+	 UserJobDTO FunctionalData = 1;
+}
+// put functionData and GetAllInformationJob
+message RequsetPutfunctionDataAllInformationJob {
+	string userId = 3;
+  repeated RequsetAllInformationJob  RequsetAllInformationJob=1;
+  RequsetfunctionData RequsetfunctionData=2;
+}
+message ResponesfunctionDataAllInformationJob {
+	google.protobuf.StringValue message = 3;
+
+}
+message RequsetfunctionData {
+   google.protobuf.StringValue JobCode = 1;
+  google.protobuf.StringValue HiringDate = 3;
+   google.protobuf.StringValue Vacation = 4;
+   google.protobuf.StringValue LengthOfService = 5;
+  google.protobuf.StringValue JobDegreeId = 6;
+  google.protobuf.StringValue Promotion = 7;
+}
+message RequsetAllInformationJob {
+  google.protobuf.StringValue JobDegreeId = 1;
+  google.protobuf.StringValue OrgId = 2;
+  google.protobuf.StringValue StartDate = 3;
+  google.protobuf.StringValue EndDate = 4;
+     google.protobuf.StringValue JobRole = 5;
+}
+message RequestPostUser{
+	string UserName = 1 ;
+	string ForthName = 2  ;
+	string FirstName = 3 ;
+	string SecondName = 4 ;
+	string ThirdName  = 5;
+	string Email = 6 ;
+	string PhoneNumber = 7 ;
+	
+	string Address =8 ;
+	string NationalId=9 ;
+	int32 UserType =10;
+	int32 UserGender=11 ;
+	string JobNameId =12;
+	optional string DomainId =13;
+	repeated JobInformationDTO InformationJobs = 14 ;
+	repeated LoginPermissionDTO LoginPermissions = 15 ;
+	repeated string RoleIds = 16 ;
+	string Mobile = 17 ;
+	string TransactionNumber = 18 ;
+}
+message ResponsePostUser { 
+    string Result =1;
+	string Message =2;
+	int32 StatusEnum = 3;
+}
+message JobInformationDTO{
+	string OrgId = 1 ; 
+	google.protobuf.Timestamp StartDate  = 2;
+	google.protobuf.Timestamp EndDate = 3 ;
+	int32 JobTime = 4 ;
+	google.protobuf.Timestamp HiringDate  = 5;
+	string JobDegreeId =6;
+	string JobRoleId =7;
+	int32 UserKind  = 8;}
+	message LoginPermissionDTO{
+	bool IsNafaz = 1 ;
+    bool IsExpired = 2 ;
+    google.protobuf.Timestamp ExpirationDateFrom =3 ;
+    google.protobuf.Timestamp ExpirationDateTo=4 ;
+}
+
+message RequestGroupId
+{
+	string GroupId = 1; 
+}
+
+message RequestedUserList
+{
+	repeated string UserId = 1;
+}
+
+message ResponseUserDataList
+{
+	repeated ResponseGetUserById UserData = 1;
+}
+
+message UserFullname
+{
+	string FirstName=1 ; 
+	string SecondName=2;
+	string ThirdName=3; 
+	string FourthName=4; 
+	string UserId = 5;
+}
+message GetAllUsersByIdsRequest{
+	repeated string userIds = 1;
+}
+
+message GetAllUsersByIdsResponse{
+	repeated GetAllUsersByIds Users = 1;
+}
+message GetAllUsersByIds{
+	string UserId = 1;
+	string FirstName = 2;
+	string SecondName = 3;
+	string ThirdName = 4; 
+	string FourthName = 5; 
+	string ImageUrl = 6;
+	string JobNameAr = 7;
+	string JobNameEn = 8;
+		string Email=9;
+		string userName=10;
+		string CommonNameAD = 11;
+
+}
+
+message RequestUsersPaginate {
+
+    int32 pageSize=2;
+ int32 pageNumber=3;
+  google.protobuf.StringValue Search=4;
+}
+message Respons{
+	int32 PageIndex =1;
+int32 TotalPages =2;
+int32 TotalItems =3;
+int32 PageSize =4;
+}
+message ResponsUsers{
+repeated	ResponsUser User=1;
+	Respons ResponsDto=2;
+}
+message ResponsUser {
+google.protobuf.StringValue FirstName=1 ; 
+google.protobuf.StringValue SecondName=2 ; 
+google.protobuf.StringValue ThridName=11 ; 
+google.protobuf.StringValue ForthName=13 ; 
+	 google.protobuf.StringValue UserName =3;
+	 google.protobuf.StringValue Email=5;
+	 google.protobuf.StringValue ImgUrl=7;
+	 google.protobuf.StringValue userId=8;
+	 google.protobuf.UInt32Value UserGender=4;
+	  
+	 
+}
+message PutUserSummaryRequest {
+   string UserName = 1;
+  string FirstName = 2;
+  string SecondName = 3;
+  string ThirdName = 4;
+  string ForthName = 5;
+  string Email = 6;
+  string PhoneNumber = 7;
+  string NationalId = 8;
+  int32 UserGender = 9;
+  string Id = 10;
+  string Address = 11;
+  string ManagerId = 12;
+}
+message PutUserSummaryResponse {
+
+	  string Result =1;
+		   int32 PageIndex =2;
+		   int32 TotalPages =3;
+		   int32 TotalItems =4;
+		   int32 PageSize =5;
+		   string Message =6;
+		   int32 StatusEnum = 7;
+		  
+}
+message GetUserByUserIdResponse{
+	 UserDto Uesr=1;
+	string Result =2;
+		   int32 PageIndex =3;
+		   int32 TotalPages =4;
+		   int32 TotalItems =5;
+		   int32 PageSize =6;
+		   string Message =7;
+		   int32 StatusEnum = 8;
+}
+message UserDto{
+	 string Id = 1;
+ string UserName = 2;
+ string FirstName = 3;
+ string SecondName = 4;
+ string ThirdName = 5;
+ string ForthName = 6;
+ string ImageUrl = 7;
+ int32 UserGender = 8;
+ string Email = 9;
+ string Address = 10;
+ string LastLoginTime = 11;
+ string PhoneNumber = 12;
+ string NationalId = 13;
+ string JobNameAr = 14;
+ string JobNameEn = 15;
+ string LanguageAr = 16;
+ string LanguageEn = 17;
+ int32 UserType = 18;
+ string ManagerId = 19;
+ string ManagerName = 20;
+  string TransactionNumber = 21;
+
+}
+message ResponseGetSomeInfoUsersByIds{
+	repeated GetSomeInfoUsersByIdsProto UsersData=1;
+
+}
+message GetSomeInfoUsersByIdsProto{
+	string UserId = 1;
+	google.protobuf.StringValue FirstName = 2;
+	google.protobuf.StringValue SecondName = 3;
+	google.protobuf.StringValue ThirdName = 4; 
+	google.protobuf.StringValue FourthName = 5; 
+	google.protobuf.StringValue ImageUrl = 6;
+	google.protobuf.StringValue JobNameAr = 7;
+	google.protobuf.StringValue JobNameEn = 8;
+	string Email=9;
+	google.protobuf.StringValue PhoneNumber=10;
+	string UserName=11;
+	string JobNameId=12;
+}
+message GetUserIdsRequest{
+	string SearchText = 1;
+}
+message GetUserIdsResponse{
+	repeated string UserIds = 1;
+}
+message GetMangerIdRequest{
+	string UserId = 1;
+}
+message GetMangerIdResponse {
+	string ManagerId = 1;
+}
+message GetAllUsersByMangerIdRequest{
+	string MangerId = 1;
+}
+message GetAllUsersByMangerIdResponse {
+	repeated UserByManager Users = 1;
+}
+message UserByManager{
+	string FirstName=1 ; 
+	string SecondName=2;
+	string ThirdName=3; 
+	string FourthName=4; 
+	string ImgUrl=5;
+	string UserId = 6;
+	bool IsChecked = 7;
+	string Email = 8;
+	string UserName = 9;
+	string JobNameAr = 10;
+	string JobNameEn = 11;
+	string PhoneNumber = 12;
+	string Mobile = 13 ;
+	string TransactionNumber = 14 ;
+	string CommonNameAD = 15;
+}
