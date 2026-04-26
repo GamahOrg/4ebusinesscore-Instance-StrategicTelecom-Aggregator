@@ -1,0 +1,98 @@
+﻿syntax = "proto3";
+option csharp_namespace = "_4EPlatform.Application.Protos";
+import "google/protobuf/wrappers.proto";
+service MedalProtoService
+{
+	rpc GetAllMedalbyCategoryId (GetAllMedalbyCategoryIdRequest) returns (GetAllMedalbyCategoryResponse);
+	rpc GetAllMedal(GetAllMedalRequest) returns (GetAllMedalResponse);	
+    rpc GetMedalOrgCount(GetMedalOrgCountRequest) returns (GetMedalOrgCountResponse);	
+    
+}
+
+
+message GetMedalOrgCountRequest {
+	int32 PageNumber =1;
+	int32 PageSize =2;
+    string Search =3;
+ 
+}
+
+message GetMedalOrgCountResponse {
+	   repeated MedalOrgCount MedalOrgCount = 1;
+    int32 PageNumber=2;
+    int32 PageSize=3;
+    int32 TotalItems = 4;
+    int32 TotalPages=5;
+    int32 StatusEnum =6;
+    string Message=7;
+}
+message MedalOrgCount {
+    string OrgId =1;
+    int32 Count =2;
+  
+
+}
+message GetAllMedalRequest {
+	int32 PageNumber =1;
+	int32 PageSize =2;
+    string Search =3;
+  int32 arrange=4;
+}
+message GetAllMedalResponse {
+	   repeated AllMedal AllMedals = 1;
+    int32 PageNumber=2;
+    int32 PageSize=3;
+    int32 TotalItems = 4;
+    int32 TotalPages=5;
+    int32 StatusEnum =6;
+    string Message=7;
+}
+message AllMedal {
+    string Id =1;
+    string Name =2;
+    string imageName =3;
+    string imagePath=4;
+    string UserId=5;
+    string Date=6;
+    int32 Type= 7;
+    string CreatedOn = 8 ;
+    bool IsOrg =9;
+    string medalTypeName=10;
+
+}
+message GetAllMedalbyCategoryIdRequest
+{
+	google.protobuf.StringValue Title =1;
+    int32 PageSize = 2;
+    int32 PageNumber = 3 ;
+    google.protobuf.StringValue CategoryId = 4 ;
+}
+
+message GetAllMedalbyCategoryIdProto
+{
+	     google.protobuf.StringValue Id = 1;
+         google.protobuf.StringValue Name = 2;
+         google.protobuf.StringValue CreatedOn = 3 ;
+         bool IsDraft = 4;
+         google.protobuf.StringValue Owner = 5;
+         google.protobuf.Int32Value TotalMedalsCount = 6;
+         google.protobuf.StringValue GivingTime = 7;
+       
+
+}
+
+message GetAllMedalbyCategoryResponse
+{
+	repeated GetAllMedalbyCategoryIdProto AllMedals=1;
+	int32 PageIndex = 2;
+	int32 TotalPages = 3;
+	int32 TotalItems = 4;
+	int32 PageSize = 5;
+	int32 PageNumber = 6;
+        string CategoryName =7;
+
+}
+
+
+
+

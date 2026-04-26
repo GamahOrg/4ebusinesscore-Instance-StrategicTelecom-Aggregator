@@ -1,0 +1,123 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+option csharp_namespace = "ControlPanel.ORGHierararchy.Protos";
+
+service OrgProtoService {
+
+  rpc GetOrg (RequestGetOrgById) returns (  ResponseGetOrgById);
+  rpc GetOrgHierarchyById (GetOrgHierarchyByIdRequest) returns (  GetOrgHierarchyByIdResponse);
+  rpc GetOrgHierarchysByIds (GetOrgHierarchysByIdsRequest) returns (  GetOrgHierarchyByIdsResponse);
+  rpc CheckOrgHierarchyById (CheckOrgHierarchyByIdRequest) returns (  CheckOrgHierarchyByIdResponse);
+  rpc CheckOrgHierarchysByIds (CheckOrgHierarchysByIdsRequest) returns (  CheckOrgHierarchyByIdResponse);
+  rpc GetAllMembersOfAllOrgs (google.protobuf.Empty) returns (ResponseOrgMembers);
+  rpc GetAllOrgTreeById (GetOrgHierarchyByIdRequest) returns (OrgTreeResponse);
+  rpc GetAllOrganizationCategories (EmptyRequest)returns(OrgCategoriesResponse);
+  rpc GetAllOrg (RequestGetAllOrg) returns (ResponseGetAllOrg);
+}
+
+message RequestGetAllOrg {}
+message EmptyRequest {}
+message RequestGetOrgById {
+    google.protobuf.Int32Value IsActiveDirectory = 1;
+	google.protobuf.StringValue Search=2 ;
+}
+
+
+message ResponseGetOrgById {
+	repeated OrgRespones OrgRespones=1;
+}
+message GetOrgHierarchyByIdRequest {
+  string OrgId = 1;
+    google.protobuf.Int32Value IsActiveDirectory = 2;
+
+}
+
+message GetOrgHierarchyByIdResponse {
+	string Id = 1 ;
+	string NameEn=2 ; 
+	string NameAr=3 ;
+}
+
+
+message OrgRespones {
+	
+	string NameEn=1 ; 
+	string NameAr=2 ; 
+	repeated google.protobuf.StringValue MmbmerId=3 ; 
+	google.protobuf.StringValue ParentId=4 ; 
+	string Description=5 ; 
+	google.protobuf.StringValue Id=6; 
+}
+message ResponseGetAllOrg{
+	repeated OrgCategoryDto OrgCategory=1;
+}
+message OrgCategoryDto{
+	string OrgId=1;
+	string CategoryId=2;
+	string CategoryNameAr=3;
+	string CategoryNameEn=4;
+	repeated string MemberId=5;
+}
+
+message GetOrgHierarchysByIdsRequest {
+ repeated string OrgId = 1;
+}
+
+message GetOrgHierarchyByIdsResponse {
+	repeated OrgDto Orgs= 1;
+}
+
+message OrgDto{
+	string Id = 1 ;
+	string NameEn=2 ; 
+	string NameAr=3 ;
+}
+
+message CheckOrgHierarchyByIdRequest {
+  string OrgId = 1;
+}
+message CheckOrgHierarchysByIdsRequest {
+ repeated  string OrgId = 1;
+}
+
+
+message CheckOrgHierarchyByIdResponse {
+	bool Found = 1 ;
+}
+
+message ResponseOrgMembers
+{
+	repeated OrgMembersObj OrgMember = 1;
+}
+
+message OrgMembersObj
+{
+	string NameEn=1; 
+	string NameAr=2; 
+	string MemberId=3;
+	string OrgId=5; 
+}
+
+message OrgTreeResponse
+{
+	repeated OrgNode AllOrgParents=1;
+
+}
+message OrgNode
+{
+	string OrgId=1;
+	string OrgNameAr=2;
+	string OrgManager=3;
+    optional string OrgParentId=4;
+	optional string OrgCategory=5;
+}
+message OrgCategoriesResponse {
+	repeated OrgCategory OrgCategories=1;
+}
+message OrgCategory
+{
+	string Id =1;
+	string NameAr=2;
+	string NameEn=3;
+}
