@@ -43,4 +43,7 @@ global using System.Text.Json;
 global using System.Threading.RateLimiting;
 global using static _4EPlatform_StrategicTelecom_Aggregator.Dto.Congratulations.Congrats.GroupCongratDto;
 global using Rega.Qimah.PermessionGroup;
+global using _4EPlatform.Application.Protos;
+global using ControlPanel.ORGHierararchy.Protos;
 global using StrategicTelecom_Aggregator.API.Protos;
+global using _4EPlatform.Application.Protos;
