@@ -6,6 +6,7 @@ global using _4EPlatform_StrategicTelecom_Aggregator.Dto.Medals.GetAllCauseStage
 global using _4EPlatform_StrategicTelecom_Aggregator.Dto.Medals.GetAllMedal;
 global using _4EPlatform_StrategicTelecom_Aggregator.Dto.thanks;
 global using _4EPlatform_StrategicTelecom_Aggregator.Extensions;
+global using _4EPlatform_StrategicTelecom_Aggregator.GrpClientsConfig;
 global using _4EPlatform_StrategicTelecom_Aggregator.Helpers;
 global using _4EPlatform_StrategicTelecom_Aggregator.Helpers.Enums;
 global using _4EPlatform_StrategicTelecom_Aggregator.Interfaces;
@@ -18,36 +19,28 @@ global using _4EPlatform_StrategicTelecom_Aggregator.Services.MedalServices;
 global using _4EPlatform_StrategicTelecom_Aggregator.Services.Thanks;
 global using _4EPlatform_StrategicTelecom_Aggregator.Services.TokenService;
 global using Asp.Versioning;
+global using Grpc.Core;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Localization;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.RateLimiting;
+global using Microsoft.AspNetCore.Server.Kestrel.Core;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Localization;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;
 global using Microsoft.Net.Http.Headers;
 global using Microsoft.OpenApi.Models;
+global using Serilog;
 global using System.Globalization;
+global using System.Net;
 global using System.Reflection;
 global using System.Security.Claims;
 global using System.Text.Json;
 global using System.Threading.RateLimiting;
-global using Microsoft.AspNetCore.Hosting;
-global using Microsoft.AspNetCore.Builder;
-global using Microsoft.Extensions.DependencyInjection;
-global using Microsoft.Extensions.Configuration;
-global using Microsoft.Extensions.Logging;
-global using Microsoft.AspNetCore.Http;
-
-global using _4EPlatform.Application.Protos;
-global using _4EPlatform.PermissionsGroupingChecker;
-global using _4EPlatform.PremessionRegister;
-
-global using _4EPlatform_StrategicTelecom_Aggregator.GrpClientsConfig;
-global using ControlPanel.ORGHierararchy.Protos;
-global using Grpc.Core;
-global using Microsoft.AspNetCore.Server.Kestrel.Core;
-global using Microsoft.Extensions.Options;
-global using Serilog;
-global using StrategicTelecom_Aggregator.API.Protos;
-
-global using System.Net;
 global using static _4EPlatform_StrategicTelecom_Aggregator.Dto.Congratulations.Congrats.GroupCongratDto;
-
+global using Rega.Qimah.PermessionGroup;
+global using StrategicTelecom_Aggregator.API.Protos;

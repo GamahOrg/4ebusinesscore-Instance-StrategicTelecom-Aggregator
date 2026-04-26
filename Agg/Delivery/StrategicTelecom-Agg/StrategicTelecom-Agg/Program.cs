@@ -1,5 +1,3 @@
-
-
 namespace _4EPlatform_StrategicTelecom_Aggregator
 {
     public class Program
